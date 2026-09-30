@@ -1,0 +1,26 @@
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local SQLite databases and runtime state
+eval_logs.db
+eval_logs.db-journal
+eval_logs.db-wal
+eval_logs.db-shm
+.stop_requested
+
+# Secrets & environment
+.env
+
+# macOS metadata
+.DS_Store
+*/.DS_Store
+
+# All SQLite databases
+*.db
