@@ -1,14 +1,14 @@
 # Autonomous LLM Hardening Harness (ALHH)
 
-An automated red-teaming and defense generation harness designed to expose semantic bypasses and dynamically patch the Enterprise LLM Security Gateway (ELSG).
+An automated red-teaming and defence generation harness designed to expose semantic bypasses and dynamically patch the Enterprise LLM Security Gateway (ELSG).
 
-While the security gateway successfully blocks overt injections and literal keyword dumps, attackers can easily bypass static filters using indirect natural language (such as spelling out numbers, using phonetic clues, or encoding secrets in hex). This harness uses three cooperating LLMs to continuously stress-test the gateway, identify covert data leaks, and automatically generate and test runtime defenses—all without breaking the assistant's ability to answer routine store questions.
+While the security gateway successfully blocks overt injections and literal keyword dumps, attackers can easily bypass static filters using indirect natural language (such as spelling out numbers, using phonetic clues, or encoding secrets in hex). This harness uses three cooperating LLMs to continuously stress-test the gateway, identify covert data leaks, and automatically generate and test runtime defences - all without breaking the assistant's ability to answer routine store questions.
 
 ---
 
 ## The Problem: The Manual Hardening Ceiling
 
-Deterministic perimeter defenses (like the ELSG reverse-proxy) reliably stop overt injections and literal credential dumps, but reach a hard operational ceiling when confronted with natural language.
+Deterministic perimeter defences (like the ELSG reverse-proxy) reliably stop overt injections and literal credential dumps, but reach a hard operational ceiling when confronted with natural language.
 
 In this implementation (a McDonald's branch operational assistant), the knowledge base contains two conflicting tiers of data:
 - **Ordinary Operational Data (which must remain accessible):** Daily Standard Operating Procedures (SOPs), equipment troubleshooting steps, and routine operational numbers like grill calibration temperatures or fridge limits.
@@ -24,7 +24,7 @@ In this implementation (a McDonald's branch operational assistant), the knowledg
 
 In my original project (Enterprise LLM Security Gateway), I built the gateway to intercept obvious, literal threats (prompt injections, explicit PII, and raw credential keywords). However, hardening against natural language manually doesn't scale. If I tried to harden it myself, I would have to spend days manually brainstorming obscure bypass prompts, inspecting terminal responses, writing regexes by hand, and repeatedly verifying that I hadn't accidentally broken routine store questions.
 
-This project automates that entire red-team / blue-team engineering cycle. Instead of manual testing, three AI models work in a closed feedback loop: one attacks the gateway using creative obfuscation, one impartially verifies whether a leak occurred, and one writes dual-layer defenses (system prompt rules and outbound regexes). On top of this, before any patch is accepted, the harness automatically runs a regression test against real store SOPs to guarantee the fix doesn't break daily operations.
+This project automates that entire red-team / blue-team engineering cycle. Instead of manual testing, three AI models work in a closed feedback loop: one attacks the gateway using creative obfuscation, one impartially verifies whether a leak occurred, and one writes dual-layer defences (system prompt rules and outbound regexes). On top of this, before any patch is accepted, the harness automatically runs a regression test against real store SOPs to guarantee the fix doesn't break daily operations.
 
 ---
 
@@ -49,7 +49,7 @@ The harness uses **Gemini 3.5 Flash Lite** (via the Google GenAI SDK) to power t
 
 ---
 
-## Telemetry & Defense Inspection
+## Telemetry & Defence Inspection
 
 Below is the live execution telemetry from the Streamlit dashboard (`dashboard.py`), illustrating how the Red Attacker pivots format representations and how the Blue Patcher synthesizes dual-layer countermeasures:
 
@@ -65,9 +65,9 @@ Below is the live execution telemetry from the Streamlit dashboard (`dashboard.p
 
 ## Defensive Profiles & Checkpoints
 
-- **Saveable Defense Snapshots:** Hardened rules and regexes can be frozen at any point and exported as portable JSON profiles directly from the dashboard.
-- **Cumulative Lineage:** Loading a saved profile allows the harness to continue stress-testing from where it left off, building on existing defenses rather than starting from scratch.
-- **Interactive Arena Testing:** Saved profiles can be loaded directly into the standalone Arena (`arena.py`), giving you a live prompt box to type your own adversarial or benign test queries by hand and evaluate how hardened defenses hold up compared to the factory baseline.
+- **Saveable Defence Snapshots:** Hardened rules and regexes can be frozen at any point and exported as portable JSON profiles directly from the dashboard.
+- **Cumulative Lineage:** Loading a saved profile allows the harness to continue stress-testing from where it left off, building on existing defences rather than starting from scratch.
+- **Interactive Arena Testing:** Saved profiles can be loaded directly into the standalone Arena (`arena.py`), giving you a live prompt box to type your own adversarial or benign test queries by hand and evaluate how hardened defences hold up compared to the factory baseline.
 
 ---
 
@@ -75,7 +75,7 @@ Below is the live execution telemetry from the Streamlit dashboard (`dashboard.p
 
 - `agents.py` — Defines system prompts and response schemas for the Red Attacker, Semantic Judge, and Blue Patcher.
 - `harness.py` — The central orchestration loop. Manages multi-round evaluations, calls `process_target_query()` from the previous project gateway, runs utility regression checks against store SOPs, and logs telemetry to SQLite (`eval_logs.db`).
-- `dashboard.py` — Streamlit telemetry console for viewing live attack success rates, round-by-round strategy pivots, breach rationales, and exporting hardened defense profiles to JSON.
+- `dashboard.py` — Streamlit telemetry console for viewing live attack success rates, round-by-round strategy pivots, breach rationales, and exporting hardened defence profiles to JSON.
 - `arena.py` — A standalone Streamlit console for interactive manual testing, complete with profile switching, live response inspection, and an arena audit log table.
 - `requirements.txt` — Python dependencies.
 
