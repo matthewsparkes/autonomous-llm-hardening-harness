@@ -89,19 +89,45 @@ ollama run llama3.2
 ```
 
 ### 2. Configure Environment and Install Dependencies
+
+**macOS / Linux:**
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 export GEMINI_API_KEY="your_api_key_here"
+pip install -r requirements.txt
+```
+
+**Windows (PowerShell):**
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+$env:GEMINI_API_KEY="your_api_key_here"
 pip install -r requirements.txt
 ```
 
 > **Note:** Ensure the `enterprise-llm-security-gateway` repository is located in the adjacent directory so the gateway engine can be imported directly.
 
 ### 3. Open the Dashboard
+
+**macOS / Linux:**
 ```bash
-streamlit run dashboard.py
+python3 -m streamlit run dashboard.py
+```
+
+**Windows:**
+```powershell
+python -m streamlit run dashboard.py
 ```
 
 ### 4. Open the Arena (Optional)
+
+**macOS / Linux:**
 ```bash
-streamlit run arena.py
+python3 -m streamlit run arena.py
+```
+
+**Windows:**
+```powershell
+python -m streamlit run arena.py
 ```
